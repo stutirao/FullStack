@@ -1,28 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv= require("dotenv")
 const app = express();
+dotenv.config({path:'./config.env'});
+require('./db/conn');
+const PORT=process.env.PORT; 
 
-const db =
-  "mongodb+srv://stuti:Stutipanda@1090@cluster0.9zbip.mongodb.net/mernstack?retryWrites=true&w=majority";
-mongoose
-  .connect(db,{
-     useNewUrlParser: true ,
-     useCreateIndex: true,
-     useUnifiedTopology:true,
-     useFindAndModify:false 
-  }) 
-  .then(() => {
-    console.log("connection successfull");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 app.get("/", (req, res) => {
   res.send(`Hello world`);
 });
 
 app.get("/about", (req, res) => {
-  res.send(`Hello about`);
+  res.send(`Hello about`); 
 });
 
 app.get("/contact", (req, res) => {
@@ -37,6 +26,6 @@ app.get("/signup", (req, res) => {
   res.send(`Hello signup`);
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("server is running at port");
 });
